@@ -1,17 +1,6 @@
 <?php get_header(); ?>
 
-  <div class="kama_breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-    <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-      <a href="https://test-wp.webmolot.pro" itemprop="item"><span itemprop="name">Главная</span>
-      </a>
-    </span>
-    <span class="kb_sep">
-      <svg width="8" height="10" viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6.39844 4.60229C6.60938 4.83667 6.60938 5.18823 6.39844 5.39917L2.64844 9.14917C2.41406 9.38354 2.0625 9.38354 1.85156 9.14917C1.61719 8.93823 1.61719 8.58667 1.85156 8.37573L5.20312 5.02417L1.85156 1.64917C1.61719 1.43823 1.61719 1.08667 1.85156 0.875732C2.0625 0.641357 2.41406 0.641357 2.625 0.875732L6.39844 4.60229Z" fill="#666666"/>
-      </svg>
-    </span>
-    <span class="kb_title">Внутренняя страница</span>
-  </div>
+  <?php if( function_exists('kama_breadcrumbs') ) kama_breadcrumbs(); ?>
 
   <article class="single-post">
     <div class="d-container">

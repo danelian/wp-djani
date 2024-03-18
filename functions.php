@@ -1,5 +1,8 @@
 <?php 
 
+require_once(__DIR__ . '/includes/wp_svg.php');
+require_once(__DIR__ . '/includes/wp_breadcrumbs.php');
+
 /**
  * ДОБАВЛЕНИЕ ВОЗМОЖНОСТЕЙ
  */

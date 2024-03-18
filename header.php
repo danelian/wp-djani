@@ -33,14 +33,16 @@
               <path fill-rule="evenodd" clip-rule="evenodd" d="M13.857 13.8583C14.2866 13.4288 14.2866 12.7324 13.857 12.3028L2.96855 1.41435C2.53901 0.984809 1.84259 0.984809 1.41305 1.41435C0.983513 1.84389 0.983512 2.5403 1.41305 2.96984L12.3015 13.8583C12.7311 14.2879 13.4275 14.2879 13.857 13.8583Z" fill="currentColor"/>
             </svg>
           </div>
-          <ul class="nav-list">
-            <li><a href="#what">Что такое джаны</a></li>
-            <li><a href="#teachers">Учителя</a></li>
-            <li><a href="#materials">Материалы</a></li>
-            <li><a href="#articles">Статьи</a></li>
-            <li><a href="#public">Сообщество</a></li>
-            <li><a href="#contacts">Контакты</a></li>
-          </ul>
+          <?php
+          wp_nav_menu([
+            'theme_location' => 'header',
+            'container' => '',
+            'menu_class' => 'nav-list',
+            'menu_id' => false,
+            'echo' => true,
+            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+          ]);
+          ?>
         </div>
         <div id="nav-open" class="nav-open">
           <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">

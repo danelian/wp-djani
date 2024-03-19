@@ -1,18 +1,28 @@
 <?php get_header(); ?>
 
-  <section class="hero">
-    <div class="d-container">
-      <div class="hero__container">
-        <div class="hero__content">
-          <h1>Что такое Джаны?</h1>
-          <p>Джаны — особые состояния сознания во время медитации / присутствия, которые характеризуются восторгом, блаженством и подобными факторами. Джаны длятся порядка двух часов.</p>
+<?php
+$hero_slides = get_field('hero_slides');
+if ($hero_slides) {
+  foreach ($hero_slides as $hero_slide) {
+    $is_active_hero_slide = $hero_slide['hero_slide_active'];
+    if ($is_active_hero_slide) { ?>
+      <section class="hero">
+        <div class="d-container">
+          <div class="hero__container">
+            <div class="hero__content">
+              <h1><?php echo $hero_slide['hero_slide_title']; ?></h1>
+              <p><?php echo $hero_slide['hero_slide_text']; ?></p>
+            </div>
+            <div class="hero__image">
+              <img src="<?php echo $hero_slide['hero_slide_image']; ?>" alt="">
+            </div>
+          </div>
         </div>
-        <div class="hero__image">
-          <img src="/img/hero-image.jpg" alt="">
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    <?php }
+  }
+}
+?>
 
   <section class="news-block">
     <div class="d-container">

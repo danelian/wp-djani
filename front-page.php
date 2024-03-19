@@ -212,35 +212,32 @@ if( $tg_block_link ):
     </div>
   </section>
 
+<?php if( have_rows('graph_cards') ): ?>
   <section class="graph-block">
     <div class="d-container">
       <div class="heading">
-        <h2 class="section-title">Что входит в программу</h2>
-        <a href="#" class="link">Подробнее о программе</a>
+        <?php if (get_field('graph_title')) { ?><h2 class="section-title"><?php the_field('graph_title'); ?></h2><?php } ?>
+        <?php 
+        $graph_link = get_field('graph_link');
+        if( $graph_link ): 
+            $graph_link_url = $graph_link['url'];
+            $graph_link_title = $graph_link['title'];
+            $graph_link_target = $graph_link['target'] ? $graph_link['target'] : '_self';
+            ?>
+          <a href="<?php echo esc_url( $graph_link_url ); ?>" target="<?php echo esc_attr( $graph_link_target ); ?>" class="link"><?php echo esc_html( $graph_link_title ); ?></a>
+        <?php endif; ?>
       </div>
       <div class="graph-block__cards">
-        <div class="graph-item">
-          <img src="/img/week1.svg" alt="">
-          <hr>
-          <p>Восстановить свой организм на физическом и ментальном уровнях</p>
-        </div>
-        <div class="graph-item">
-          <img src="/img/week2.svg" alt="">
-          <hr>
-          <p>Избавитесь от негативных и навязчивых мыслей</p>
-        </div>
-        <div class="graph-item">
-          <img src="/img/week3.svg" alt="">
-          <hr>
-          <p>Настроитесь на позитивное состояние и уверенность</p>
-        </div>
-        <div class="graph-item">
-          <img src="/img/week4.svg" alt="">
-          <hr>
-          <p>Активируете свой внутренний потенциал</p>
-        </div>
+        <?php while( have_rows('graph_cards') ): the_row(); ?>
+          <div class="graph-item">
+            <?php if (get_sub_field('graph_card_icon')) { ?><img src="<?php the_sub_field('graph_card_icon'); ?>" alt=""><?php } ?>
+            <hr>
+            <?php if (get_sub_field('graph_card_text')) { ?><p><?php the_sub_field('graph_card_text'); ?></p><?php } ?>
+          </div>
+        <?php endwhile; ?>
       </div>
     </div>
   </section>
+<?php endif; ?>
 
 <?php get_footer(); ?>

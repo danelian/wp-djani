@@ -147,60 +147,23 @@ if( $tg_block_link ):
     <div class="d-container">
       <div class="heading">
         <h2 class="section-title">Статьи</h2>
-        <a href="#" class="link">Все статьи</a>
+        <a href="<?php echo get_post_type_archive_link('articles'); ?>" class="link">Все статьи</a>
       </div>
       <div class="articles-block__cards">
-        <a href="#" class="acard">
-          <img src="/img/bcard-image-1.jpg" class="acard__image" alt="">
-          <div class="acard__content">
-            <h2>Секреты Джан: как медитация может преобразить вашу жизнь</h2>
-            <p>КРАЙНЕ ВАЖНО уметь медитировать несколькими способами. Если вдруг один способ становится</p>
-            <div class="date">21.02.2024</div>
-          </div>
-        </a>
-        <a href="#" class="acard">
-          <img src="/img/bcard-image-1.jpg" class="acard__image" alt="">
-          <div class="acard__content">
-            <h2>Секреты Джан: как медитация может преобразить вашу жизнь</h2>
-            <p>КРАЙНЕ ВАЖНО уметь медитировать несколькими способами. Если вдруг один способ становится</p>
-            <div class="date">21.02.2024</div>
-          </div>
-        </a>
-        <a href="#" class="acard">
-          <img src="/img/bcard-image-1.jpg" class="acard__image" alt="">
-          <div class="acard__content">
-            <h2>Секреты Джан: как медитация может преобразить вашу жизнь</h2>
-            <p>КРАЙНЕ ВАЖНО уметь медитировать несколькими способами. Если вдруг один способ становится</p>
-            <div class="date">21.02.2024</div>
-          </div>
-        </a>
-        <a href="#" class="acard">
-          <img src="/img/bcard-image-1.jpg" class="acard__image" alt="">
-          <div class="acard__content">
-            <h2>Секреты Джан: как медитация может преобразить вашу жизнь</h2>
-            <p>КРАЙНЕ ВАЖНО уметь медитировать несколькими способами. Если вдруг один способ становится</p>
-            <div class="date">21.02.2024</div>
-          </div>
-        </a>
-        <a href="#" class="acard">
-          <img src="/img/bcard-image-1.jpg" class="acard__image" alt="">
-          <div class="acard__content">
-            <h2>Секреты Джан: как медитация может преобразить вашу жизнь</h2>
-            <p>КРАЙНЕ ВАЖНО уметь медитировать несколькими способами. Если вдруг один способ становится</p>
-            <div class="date">21.02.2024</div>
-          </div>
-        </a>
-        <a href="#" class="acard">
-          <img src="/img/bcard-image-1.jpg" class="acard__image" alt="">
-          <div class="acard__content">
-            <h2>Секреты Джан: как медитация может преобразить вашу жизнь</h2>
-            <p>КРАЙНЕ ВАЖНО уметь медитировать несколькими способами. Если вдруг один способ становится</p>
-            <div class="date">21.02.2024</div>
-          </div>
-        </a>
+        <?php
+        $args = array(
+            'post_type'      => 'articles',
+            'posts_per_page' => 6,
+        );
+        $query = new WP_Query( $args );
+        if ( $query->have_posts() ) :
+            while ( $query->have_posts() ) : $query->the_post();
+        ?>
+          <?php get_template_part('template-parts/acard'); ?>
+        <?php endwhile; endif; wp_reset_postdata(); ?>
       </div>
       <div class="link-center">
-        <button type="button" class="button-second">Показать еще</button>
+        <button type="button" class="button-second" id="load-more-articles" data-max-pages="<?php echo $query->max_num_pages; ?>">Показать еще</button>
       </div>
     </div>
   </section>

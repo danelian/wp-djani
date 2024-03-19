@@ -23,29 +23,57 @@ $(document).ready(function () {
 
 
 jQuery(document).ready(function($) {
-  var currentPage = 1;
-  var maxPages = $('#load-more-blog').data('max-pages');
-  var postsPerPage = 3;
+  var currentPageBlog = 1;
+  var maxPagesBlog = $('#load-more-blog').data('max-pages');
+  var postsPerPageBlog = 3;
   $('#load-more-blog').on('click', function() {
-    currentPage++;
-    if (currentPage <= maxPages) {
+    currentPageBlog++;
+    if (currentPageBlog <= maxPagesBlog) {
       $.ajax({
         url: ajax_params.url,
         type: 'POST',
         data: {
-          action: 'load_more_posts',
-          page: currentPage,
-          posts_per_page: postsPerPage
+          action: 'load_more_posts_blog',
+          page: currentPageBlog,
+          posts_per_page: postsPerPageBlog
         },
         success: function(response) {
           $('.blog-block__cards').append(response);
-          if (currentPage === maxPages) {
+          if (currentPageBlog === maxPagesBlog) {
             $('#load-more-blog').hide();
           }
         }
       });
     } else {
       $('#load-more-blog').hide();
+    }
+  });
+});
+
+jQuery(document).ready(function($) {
+  var currentPageArticles = 1;
+  var maxPagesArticles = $('#load-more-articles').data('max-pages');
+  var postsPerPageArticles = 6;
+  $('#load-more-articles').on('click', function() {
+    currentPageArticles++;
+    if (currentPageArticles <= maxPagesArticles) {
+      $.ajax({
+        url: ajax_params.url,
+        type: 'POST',
+        data: {
+          action: 'load_more_posts_articles',
+          page: currentPageArticles,
+          posts_per_page: postsPerPageArticles
+        },
+        success: function(response) {
+          $('.articles-block__cards').append(response);
+          if (currentPageArticles === maxPagesArticles) {
+            $('#load-more-articles').hide();
+          }
+        }
+      });
+    } else {
+      $('#load-more-articles').hide();
     }
   });
 });

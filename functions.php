@@ -169,11 +169,10 @@ function custom_post_type_articles() {
 add_action('init', 'custom_post_type_articles');
 
 
-
 // AJAX ПОДГРУЗКА ПОСТОВ ДЛЯ ТИПА ПОСТОВ - BLOG
-add_action('wp_ajax_load_more_posts', 'load_more_posts_callback');
-add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts_callback');
-function load_more_posts_callback() {
+add_action('wp_ajax_load_more_posts_blog', 'load_more_posts_blog_callback');
+add_action('wp_ajax_nopriv_load_more_posts_blog', 'load_more_posts_blog_callback');
+function load_more_posts_blog_callback() {
   $args = array(
     'post_type'      => 'blog',
     'posts_per_page' => $_POST['posts_per_page'],
@@ -184,6 +183,26 @@ function load_more_posts_callback() {
     while ($query->have_posts()) {
       $query->the_post();
       get_template_part('template-parts/bcard');
+    }
+    wp_reset_postdata();
+  }
+  wp_die();
+}
+
+// AJAX ПОДГРУЗКА ПОСТОВ ДЛЯ ТИПА ПОСТОВ - ARTICLES
+add_action('wp_ajax_load_more_posts_articles', 'load_more_posts_articles_callback');
+add_action('wp_ajax_nopriv_load_more_posts_articles', 'load_more_posts_articles_callback');
+function load_more_posts_articles_callback() {
+  $args = array(
+    'post_type'      => 'articles',
+    'posts_per_page' => $_POST['posts_per_page'],
+    'paged'          => $_POST['page']
+  );
+  $query = new WP_Query($args);
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+      get_template_part('template-parts/acard');
     }
     wp_reset_postdata();
   }

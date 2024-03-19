@@ -43,7 +43,7 @@ function danelian_scripts() {
   wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery-3.4.1.js', array(), null, true);
   wp_enqueue_script('jquery');
   // App js
-  wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.min.js', array('jquery', 'swiper'), null, true);
+  wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'danelian_scripts');
 
@@ -167,4 +167,25 @@ function custom_post_type_articles() {
     register_post_type('articles', $args);
 }
 add_action('init', 'custom_post_type_articles');
-?>
+
+
+
+// AJAX ПОДГРУЗКА ПОСТОВ ДЛЯ ТИПА ПОСТОВ - BLOG
+add_action('wp_ajax_load_more_posts', 'load_more_posts_callback');
+add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts_callback');
+function load_more_posts_callback() {
+  $args = array(
+    'post_type'      => 'blog',
+    'posts_per_page' => $_POST['posts_per_page'],
+    'paged'          => $_POST['page']
+  );
+  $query = new WP_Query($args);
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+      get_template_part('template-parts/bcard');
+    }
+    wp_reset_postdata();
+  }
+  wp_die();
+}

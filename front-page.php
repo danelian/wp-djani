@@ -99,30 +99,23 @@ if ($hero_slides) {
     <div class="d-container">
       <div class="heading">
         <h2 class="section-title">Блог</h2>
-        <a href="#" class="link">Перейти в блог</a>
+        <a href="<?php echo get_post_type_archive_link('blog'); ?>" class="link">Перейти в блог</a>
       </div>
       <div class="blog-block__cards">
-        <a href="#" class="bcard">
-          <img src="/img/bcard-image-1.jpg" class="bcard__image" alt="">
-          <h2>Блаженство Джан</h2>
-          <p>Ум сосредоточен и сконцентрирован, он однонаправленно удерживает в фокусе внимания объект или мысль, не распаляясь на всеобъемлющее обилие информационного потока роя мыслей Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias, veniam.</p>
-          <div class="button-primary">Узнать подробнее</div>
-        </a>
-        <a href="#" class="bcard">
-          <img src="/img/bcard-image-2.jpg" class="bcard__image" alt="">
-          <h2>Эмоциональная чистота</h2>
-          <p>Ум сосредоточен и сконцентрирован, он однонаправленно удерживает в фокусе внимания объект или мысль, не распаляясь на всеобъемлющее обилие информационного потока роя мыслей</p>
-          <div class="button-primary">Узнать подробнее</div>
-        </a>
-        <a href="#" class="bcard">
-          <img src="/img/bcard-image-3.jpg" class="bcard__image" alt="">
-          <h2>Гармония Сознания</h2>
-          <p>Ум сосредоточен и сконцентрирован, он однонаправленно удерживает в фокусе внимания объект или мысль, не распаляясь на всеобъемлющее обилие информационного потока роя мыслей</p>
-          <div class="button-primary">Узнать подробнее</div>
-        </a>
+      <?php
+      $args = array(
+          'post_type'      => 'blog',
+          'posts_per_page' => 3,
+      );
+      $query = new WP_Query( $args );
+      if ( $query->have_posts() ) :
+          while ( $query->have_posts() ) : $query->the_post();
+      ?>
+        <?php get_template_part('template-parts/bcard'); ?>
+      <?php endwhile; endif; wp_reset_postdata(); ?>
       </div>
       <div class="link-center">
-        <button type="button" class="button-second">Показать еще</button>
+        <button type="button" class="button-second" id="load-more-blog" data-max-pages="<?php echo $query->max_num_pages; ?>">Показать еще</button>
       </div>
     </div>
   </section>

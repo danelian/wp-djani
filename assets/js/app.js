@@ -20,3 +20,32 @@ $(document).ready(function () {
   }))
 
 });
+
+
+jQuery(document).ready(function($) {
+  var currentPage = 1;
+  var maxPages = $('#load-more-blog').data('max-pages');
+  var postsPerPage = 3;
+  $('#load-more-blog').on('click', function() {
+    currentPage++;
+    if (currentPage <= maxPages) {
+      $.ajax({
+        url: ajax_params.url,
+        type: 'POST',
+        data: {
+          action: 'load_more_posts',
+          page: currentPage,
+          posts_per_page: postsPerPage
+        },
+        success: function(response) {
+          $('.blog-block__cards').append(response);
+          if (currentPage === maxPages) {
+            $('#load-more-blog').hide();
+          }
+        }
+      });
+    } else {
+      $('#load-more-blog').hide();
+    }
+  });
+});

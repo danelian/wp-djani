@@ -127,19 +127,28 @@ if ($hero_slides) {
     </div>
   </section>
 
-  <section class="tg-block">
-    <div class="d-container">
-      <div class="tg-block__wrapper">
-        <h2>Вступай в наше сообщество и следи за актуальными новостями</h2>
-        <a href="#" target="_blank" class="tg-button">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M28.8995 5.12807L24.712 25.0656C24.3995 26.4406 23.5245 26.8156 22.337 26.1281L15.8995 21.3781L12.837 24.3781C12.462 24.7531 12.212 25.0031 11.5245 25.0031L11.962 18.4406L23.8995 7.69057C24.462 7.25307 23.7745 6.94057 23.087 7.44057L8.33702 16.6906L2.02452 14.7531C0.649515 14.3156 0.587015 13.3781 2.27452 12.6906L27.1495 3.12807C28.2745 2.69057 29.2745 3.37807 28.8995 5.12807Z" fill="currentColor"/>
-          </svg>
-          <span>t.me/janas_meditation</span>
-        </a>
+<?php 
+$tg_block_link = get_field('tg_block_link');
+if( $tg_block_link ): 
+    $tg_block_link_url = $tg_block_link['url'];
+    $tg_block_link_title = $tg_block_link['title'];
+    $tg_block_link_target = $tg_block_link['target'] ? $tg_block_link['target'] : '_self';
+    ?>
+    <section class="tg-block">
+      <div class="d-container">
+        <div class="tg-block__wrapper">
+          <?php if (get_field('tg_block_title')) { ?><h2><?php the_field('tg_block_title'); ?></h2><?php } ?>
+          <a href="<?php echo esc_url( $tg_block_link_url ); ?>" target="<?php echo esc_attr( $tg_block_link_target ); ?>" class="tg-button">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M28.8995 5.12807L24.712 25.0656C24.3995 26.4406 23.5245 26.8156 22.337 26.1281L15.8995 21.3781L12.837 24.3781C12.462 24.7531 12.212 25.0031 11.5245 25.0031L11.962 18.4406L23.8995 7.69057C24.462 7.25307 23.7745 6.94057 23.087 7.44057L8.33702 16.6906L2.02452 14.7531C0.649515 14.3156 0.587015 13.3781 2.27452 12.6906L27.1495 3.12807C28.2745 2.69057 29.2745 3.37807 28.8995 5.12807Z" fill="currentColor"/>
+            </svg>
+            <span><?php echo esc_html( $tg_block_link_title ); ?></span>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+<?php endif; ?>
+
 
   <section class="articles-block">
     <div class="d-container">

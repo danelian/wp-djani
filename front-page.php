@@ -31,66 +31,23 @@ if ($hero_slides) {
         <a href="#" class="link">Все новости</a>
       </div>
       <div class="news-block__container">
-        <div class="big-ncards">
-          <a href="single.html" class="ncard-l">
-            <div class="ncard-l__content">
-              <h2>Джаны и счастье</h2>
-              <p>Ум сосредоточен и сконцентрирован, он однонаправленно удерживает в фокусе внимания объект или мысль, не распаляясь на всеобъемлющее обилие информационного потока роя мыслей...</p>
-              <div class="date">21.02.2024</div>
-            </div>
-            <div class="ncard-l__image" style="background-image: url('./img/ncard-image-1.jpg');"></div>
-          </a>
-        </div>
-        <div class="small-ncards">
-          <a href="single.html" class="ncard">
-            <div class="ncard__image" style="background-image: url('./img/ncard-image-2.jpg');"></div>
-            <div class="ncard__content">
-              <h2>Практика Джанов</h2>
-              <p>Разум проявляет сосредоточенность и высокую концентрацию, направляя свое внимание в определенную точку, тем самым удерживая фокус на объекте или идее, и не растворяясь в обширном потоке информации, представленном множеством разнообразных мысленных волн.</p>
-              <div class="date">21.02.2024</div>
-            </div>
-          </a>
-          <a href="single.html" class="ncard">
-            <div class="ncard__image" style="background-image: url('./img/ncard-image-3.jpg');"></div>
-            <div class="ncard__content">
-              <h2>Сознание в потоке</h2>
-              <p>Ум проявляет высокую степень сосредоточенности и концентрации, удерживая своё внимание в определённом направлении, чтобы сохранить фокус на объекте или идее, не растворяясь в разнообразном потоке мыслей и информации.</p>
-              <div class="date">21.02.2024</div>
-            </div>
-          </a>
-        </div>
-        <div class="small-ncards">
-          <a href="single.html" class="ncard">
-            <div class="ncard__image" style="background-image: url('./img/ncard-image-4.jpg');"></div>
-            <div class="ncard__content">
-              <h2>Практика Джанов</h2>
-              <p>Разум проявляет сосредоточенность и высокую концентрацию, направляя свое внимание в определенную точку, тем самым удерживая фокус на объекте или идее, и не растворяясь в обширном потоке информации, представленном множеством разнообразных мысленных волн.</p>
-              <div class="date">21.02.2024</div>
-            </div>
-          </a>
-          <a href="single.html" class="ncard">
-            <div class="ncard__image" style="background-image: url('./img/ncard-image-5.jpg');"></div>
-            <div class="ncard__content">
-              <h2>Сознание в потоке</h2>
-              <p>Ум проявляет высокую степень сосредоточенности и концентрации, удерживая своё внимание в определённом направлении, чтобы сохранить фокус на объекте или идее, не растворяясь в разнообразном потоке мыслей и информации.</p>
-              <div class="date">21.02.2024</div>
-            </div>
-          </a>
-        </div>
-        <div class="big-ncards">
-          <a href="single.html" class="ncard-l">
-            <div class="ncard-l__content">
-              <h2>Джаны и счастье</h2>
-              <p>Ум сосредоточен и сконцентрирован, он однонаправленно удерживает в фокусе внимания объект или мысль, не распаляясь на всеобъемлющее обилие информационного потока роя мыслей...</p>
-              <div class="date">21.02.2024</div>
-            </div>
-            <div class="ncard-l__image" style="background-image: url('./img/ncard-image-6.jpg');"></div>
-          </a>
-        </div>
+      <?php
+      $args = array(
+          'post_type'      => 'news',
+          'posts_per_page' => 3,
+      );
+      $query = new WP_Query( $args );
+      if ( $query->have_posts() ) :
+          while ( $query->have_posts() ) : $query->the_post();
+      ?>
+        <?php get_template_part('template-parts/ncard'); ?>
+      <?php endwhile; endif; wp_reset_postdata(); ?>
       </div>
+      <!-- <div class="big-ncards"></div> -->
+      <!-- <div class="small-ncards"></div> -->
 
       <div class="link-center">
-        <button type="button" class="button-second">Показать еще</button>
+        <button type="button" class="button-second" id="load-more-news" data-max-pages="<?php echo $query->max_num_pages; ?>">Показать еще</button>
       </div>
     </div>
   </section>

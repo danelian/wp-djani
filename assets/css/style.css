@@ -472,11 +472,11 @@ body {
   }
   .hero__image {
     width: 100%;
-    aspect-ratio: 66/43;
     height: auto;
     min-height: auto;
   }
   .hero__image img {
+    aspect-ratio: 66/43;
     height: auto;
   }
 }

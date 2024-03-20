@@ -169,6 +169,26 @@ function custom_post_type_articles() {
 add_action('init', 'custom_post_type_articles');
 
 
+// AJAX ПОДГРУЗКА ПОСТОВ ДЛЯ ТИПА ПОСТОВ - NEWS
+add_action('wp_ajax_load_more_posts_news', 'load_more_posts_news_callback');
+add_action('wp_ajax_nopriv_load_more_posts_news', 'load_more_posts_news_callback');
+function load_more_posts_news_callback() {
+  $args = array(
+    'post_type'      => 'news',
+    'posts_per_page' => $_POST['posts_per_page'],
+    'paged'          => $_POST['page']
+  );
+  $query = new WP_Query($args);
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+      get_template_part('template-parts/ncard');
+    }
+    wp_reset_postdata();
+  }
+  wp_die();
+}
+
 // AJAX ПОДГРУЗКА ПОСТОВ ДЛЯ ТИПА ПОСТОВ - BLOG
 add_action('wp_ajax_load_more_posts_blog', 'load_more_posts_blog_callback');
 add_action('wp_ajax_nopriv_load_more_posts_blog', 'load_more_posts_blog_callback');

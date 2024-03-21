@@ -1428,7 +1428,7 @@ body {
   margin-bottom: 12px !important;
 }
 
-.table {
+table {
   margin-top: 40px;
   margin-bottom: 0;
   width: 100%;
@@ -1438,7 +1438,10 @@ body {
   line-height: 1.5;
   background: #fff !important;
 }
-.table th {
+.table-wrapper:not(:last-child) {
+  margin-bottom: 32px;
+}
+table th {
   padding: 20px 18px;
   border: 1px solid #dedede;
   font-size: 14px;
@@ -1449,7 +1452,7 @@ body {
   color: var(--white-color);
   background: var(--global-color);
 }
-.table td {
+table td {
   padding: 20px 18px;
   border: 1px solid #dedede;
   font-size: 14px;
@@ -1457,23 +1460,23 @@ body {
   color: var(--font-color);
   vertical-align: middle;
 }
-.table tbody tr:nth-child(even) {
+table tbody tr:nth-child(even) {
   background: #f8f8f8 !important;
 }
-.table tbody tr td:nth-child(1) {
+table tbody tr td:nth-child(1) {
   font-weight: bold;
 }
 
 @media screen and (max-width: 1024px) {
-  .table {
+  table {
     margin-top: 32px;
     min-width: 700px;
     display: block;
   }
-  .table-wrapper {
+  table-wrapper {
     overflow-x: scroll;
   }
-  .table th, .table td {
+  table th, table td {
     padding: 16px 12px;
   }
 }

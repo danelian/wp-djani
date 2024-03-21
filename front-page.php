@@ -28,7 +28,7 @@ if ($hero_slides) {
     <div class="d-container">
       <div class="heading">
         <h2 class="section-title">Новости</h2>
-        <a href="#" class="link">Все новости</a>
+        <a href="<?php echo get_post_type_archive_link('news'); ?>" class="link">Все новости</a>
       </div>
       <div class="news-block__container">
       <?php

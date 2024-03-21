@@ -1526,3 +1526,63 @@ body {
     margin-bottom: 20px;
   }
 }/*# sourceMappingURL=style.css.map */
+
+
+.archive-block {
+  padding-bottom: 60px;
+}
+.archive-block .heading {
+  margin-bottom: 32px;
+}
+/*-----pagination-----*/
+.screen-reader-text {
+  display: none;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  width: 100%;
+}
+.nav-links {
+  display: flex;
+}
+.page-numbers {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  margin: 0 5px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 40px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--font-color);
+  border-radius: 10px;
+  min-width: 40px;
+  height: 40px;
+  background-color: var(--grey-color);
+  transition: all 0.3s ease;
+}
+.page-numbers.disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+.page-numbers:hover, .page-numbers.current {
+  color: var(--white-color) !important;
+  background-color: var(--global-color);
+}
+.page-numbers.prev,
+.page-numbers.next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+}
+.page-numbers.prev.disabled,
+.page-numbers.next.disabled {
+  opacity: .5;
+  cursor: auto;
+}

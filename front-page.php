@@ -30,21 +30,36 @@ if ($hero_slides) {
         <h2 class="section-title">Новости</h2>
         <a href="<?php echo get_post_type_archive_link('news'); ?>" class="link">Все новости</a>
       </div>
+
       <div class="news-block__container">
-      <?php
-      $args = array(
+        <?php
+        $args = array(
           'post_type'      => 'news',
           'posts_per_page' => 3,
-      );
-      $query = new WP_Query( $args );
-      if ( $query->have_posts() ) :
-          while ( $query->have_posts() ) : $query->the_post();
-      ?>
-        <?php get_template_part('template-parts/ncard'); ?>
-      <?php endwhile; endif; wp_reset_postdata(); ?>
+        );
+        $query = new WP_Query($args);
+        if ($query->have_posts()) :
+          $count = 0;
+          while ($query->have_posts()) : $query->the_post();
+            $count++;
+            if ($count === 1) : ?>
+              <div class="row-ncards">
+                <div class="big-ncards">
+                  <?php get_template_part('template-parts/ncard-l'); ?>
+                </div>
+                <div class="small-ncards">
+            <?php else : ?>
+                  <?php get_template_part('template-parts/ncard'); ?>
+            <?php endif; ?>
+            <?php if ($count === 3) : ?>
+                </div>
+              </div>
+            <?php endif;
+          endwhile;
+        endif;
+        wp_reset_postdata();
+        ?>
       </div>
-      <!-- <div class="big-ncards"></div> -->
-      <!-- <div class="small-ncards"></div> -->
 
       <div class="link-center">
         <button type="button" class="button-second" id="load-more-news" data-max-pages="<?php echo $query->max_num_pages; ?>">Показать еще</button>

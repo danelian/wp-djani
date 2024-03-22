@@ -170,8 +170,27 @@ add_action('init', 'custom_post_type_articles');
 
 
 // AJAX ПОДГРУЗКА ПОСТОВ ДЛЯ ТИПА ПОСТОВ - NEWS
+// add_action('wp_ajax_load_more_posts_news', 'load_more_posts_news_callback');
+// add_action('wp_ajax_nopriv_load_more_posts_news', 'load_more_posts_news_callback');
+// function load_more_posts_news_callback() {
+//   $args = array(
+//     'post_type'      => 'news',
+//     'posts_per_page' => $_POST['posts_per_page'],
+//     'paged'          => $_POST['page']
+//   );
+//   $query = new WP_Query($args);
+//   if ($query->have_posts()) {
+//     while ($query->have_posts()) {
+//       $query->the_post();
+//       get_template_part('template-parts/ncard');
+//     }
+//     wp_reset_postdata();
+//   }
+//   wp_die();
+// }
 add_action('wp_ajax_load_more_posts_news', 'load_more_posts_news_callback');
 add_action('wp_ajax_nopriv_load_more_posts_news', 'load_more_posts_news_callback');
+
 function load_more_posts_news_callback() {
   $args = array(
     'post_type'      => 'news',
@@ -179,15 +198,29 @@ function load_more_posts_news_callback() {
     'paged'          => $_POST['page']
   );
   $query = new WP_Query($args);
-  if ($query->have_posts()) {
-    while ($query->have_posts()) {
-      $query->the_post();
-      get_template_part('template-parts/ncard');
-    }
-    wp_reset_postdata();
-  }
+  if ($query->have_posts()) :
+    $count = 0;
+    while ($query->have_posts()) : $query->the_post();
+      $count++;
+      if ($count === 1) : ?>
+        <div class="row-ncards">
+          <div class="big-ncards">
+            <?php get_template_part('template-parts/ncard-l'); ?>
+          </div>
+          <div class="small-ncards">
+      <?php else : ?>
+            <?php get_template_part('template-parts/ncard'); ?>
+      <?php endif; ?>
+      <?php if ($count % 3 === 0) : ?>
+          </div>
+        </div>
+      <?php endif;
+    endwhile;
+  endif;
+  wp_reset_postdata();
   wp_die();
 }
+
 
 // AJAX ПОДГРУЗКА ПОСТОВ ДЛЯ ТИПА ПОСТОВ - BLOG
 add_action('wp_ajax_load_more_posts_blog', 'load_more_posts_blog_callback');

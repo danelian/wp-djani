@@ -88,6 +88,9 @@ textarea:not([rows]) {
   font-style: normal;
 }
 /*-----generals-----*/
+html {
+  overflow-x: hidden !important;
+}
 body {
   font-family: "Montserrat", sans-serif;
   font-style: normal;
@@ -97,7 +100,7 @@ body {
   color: var(--font-color);
   background: var(--white-color);
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -519,10 +522,21 @@ body {
   margin-left: 20px;
 }
 .news-block__container {
+  /* display: flex;
+  flex-wrap: wrap; */
+  width: 100%;
+}
+.row-ncards {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   gap: 40px;
+}
+.row-ncards:not(:last-child) {
+  margin-bottom: 40px;
+}
+.row-ncards:nth-child(even) {
+  flex-direction: row-reverse;
 }
 .news-block .link-center {
   margin-top: 40px;
@@ -700,6 +714,9 @@ body {
   .news-block__container {
     flex-direction: column;
     gap: 0;
+  }
+  .row-ncards {
+    gap: 20px;
   }
   .news-block__container > div:not(:last-child) {
     margin-bottom: 20px;
@@ -1375,6 +1392,7 @@ body {
      object-fit: cover;
 }
 
+.single-post h2,
 .var1 h2,
 .var2 h2,
 .var3 h2 {
@@ -1385,6 +1403,7 @@ body {
   line-height: 1.5;
   color: #333333;
 }
+.single-post p,
 .var1 p,
 .var2 p,
 .var3 p {
@@ -1395,6 +1414,7 @@ body {
   line-height: 1.5;
   color: #666666;
 }
+.single-post blockquote,
 .var1 blockquote,
 .var2 blockquote,
 .var3 blockquote {
@@ -1405,7 +1425,10 @@ body {
   border: 0;
   background-color: var(--global-color);
 }
-.var1 blockquote:not(:first-child), .var1 blockquote:not(:last-child),
+.single-post blockquote:not(:first-child), 
+.single-post blockquote:not(:last-child),
+.var1 blockquote:not(:first-child), 
+.var1 blockquote:not(:last-child),
 .var2 blockquote:not(:first-child),
 .var2 blockquote:not(:last-child),
 .var3 blockquote:not(:first-child),
@@ -1413,6 +1436,7 @@ body {
   margin-top: 24px;
   margin-bottom: 24px;
 }
+.single-post blockquote p,
 .var1 blockquote p,
 .var2 blockquote p,
 .var3 blockquote p {
@@ -1422,6 +1446,7 @@ body {
   font-style: italic;
   color: var(--white-color);
 }
+.single-post blockquote p:not(:last-child),
 .var1 blockquote p:not(:last-child),
 .var2 blockquote p:not(:last-child),
 .var3 blockquote p:not(:last-child) {
@@ -1510,17 +1535,22 @@ table tbody tr td:nth-child(1) {
     margin-bottom: 24px;
     height: 280px;
   }
+  .single-post h2,
   .var1 h2,
   .var2 h2,
   .var3 h2 {
     font-size: 16px;
   }
+  .single-post blockquote,
   .var1 blockquote,
   .var2 blockquote,
   .var3 blockquote {
     padding: 16px;
   }
-  .var1 blockquote:not(:first-child), .var1 blockquote:not(:last-child),
+  .single-post blockquote:not(:first-child), 
+  .single-post blockquote:not(:last-child),
+  .var1 blockquote:not(:first-child), 
+  .var1 blockquote:not(:last-child),
   .var2 blockquote:not(:first-child),
   .var2 blockquote:not(:last-child),
   .var3 blockquote:not(:first-child),
